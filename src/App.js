@@ -191,7 +191,7 @@ function useStyles() {
 // FIX #5: Music Player Component
 function MusicPlayer() {
   const [playing, setPlaying] = useState(false);
-  const [loaded, setLoaded] = useState(false);
+  const [_loaded, setLoaded] = useState(false);
   const audioRef = useRef(null);
 
   useEffect(() => {
@@ -427,7 +427,7 @@ function CoupleStory() {
             <div style={{ borderRadius: 14, overflow: "hidden", border: "1px solid rgba(212,175,55,.35)", aspectRatio: "3/4", boxShadow: "0 20px 60px rgba(0,0,0,.55), 0 0 0 1px rgba(212,175,55,.12)" }}>
               <img
                src={couplePhoto}
-                
+              alt="image"
                 style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", filter: "sepia(20%) brightness(0.88) contrast(1.08)" }}
               />
               <div style={{ position: "absolute", inset: 0, background: "linear-gradient(0deg,rgba(5,8,16,.82) 0%,transparent 55%)" }} />
