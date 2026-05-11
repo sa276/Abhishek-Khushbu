@@ -74,6 +74,10 @@ function useStyles() {
       .ec:hover{transform:translateY(-10px) scale(1.025);border-color:rgba(212,175,55,.65)!important;box-shadow:0 24px 64px rgba(212,175,55,.18),0 0 0 1px rgba(212,175,55,.4),inset 0 0 40px rgba(212,175,55,.04)}
       .rbtn{background:linear-gradient(135deg,rgba(212,175,55,.18),rgba(212,175,55,.04));border:1px solid rgba(212,175,55,.45);color:#F0C050;padding:14px 44px;font-size:.7rem;letter-spacing:.45em;text-transform:uppercase;border-radius:4px;cursor:pointer;font-family:'Cinzel',serif;transition:all .35s ease;animation:pglow 3s ease-in-out infinite}
       .rbtn:hover{background:linear-gradient(135deg,rgba(212,175,55,.35),rgba(212,175,55,.12));transform:translateY(-3px);letter-spacing:.55em}
+      @media(max-width:640px){
+        .story-grid{grid-template-columns:1fr!important;}
+        .story-grid>div:first-child{max-width:320px;margin:0 auto;width:100%;}
+      }
 
       /* Countdown styles */
       .cd-block{
@@ -421,7 +425,7 @@ function CoupleStory() {
         </div>
 
         {/* Top: image + opening */}
-        <div className="rv" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,1.6fr)", gap: "clamp(24px,4vw,52px)", alignItems: "center", marginBottom: 40 }}>
+        <div className="rv story-grid" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,1.6fr)", gap: "clamp(24px,4vw,52px)", alignItems: "center", marginBottom: 40 }}>
           {/* Compact couple image */}
           <div style={{ position: "relative" }}>
             <div style={{ borderRadius: 14, overflow: "hidden", border: "1px solid rgba(212,175,55,.35)", aspectRatio: "3/4", boxShadow: "0 20px 60px rgba(0,0,0,.55), 0 0 0 1px rgba(212,175,55,.12)" }}>
