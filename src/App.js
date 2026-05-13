@@ -480,11 +480,13 @@ function RSVP() {
     if (!name.trim() || !choice) return;
     setStatus("sending");
     try {
-      await fetch(APPS_SCRIPT_URL, {
-        method: "POST",
+      const params = new URLSearchParams({
+        name: name.trim(),
+        rsvp: choice === "yes" ? "Yes, with pleasure!" : "Sorry, but wish you the best",
+      });
+      await fetch(`${APPS_SCRIPT_URL}?${params.toString()}`, {
+        method: "GET",
         mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: name.trim(), rsvp: choice === "yes" ? "Yes, with pleasure!" : "Sorry, but wish you the best" }),
       });
       setStatus("done");
     } catch {
@@ -508,7 +510,7 @@ function RSVP() {
         {status === "done" ? (
           <div className="rv gc" style={{ textAlign: "center", padding: "52px 36px", border: "1px solid rgba(212,175,55,.35)" }}>
             <div style={{ fontSize: "2.4rem", marginBottom: 18 }}>
-              {choice === "yes" ? "🥂" : "🙏"}
+              {choice === "yes" ? "🎉" : "🙏"}
             </div>
             <div className="cd gt" style={{ fontSize: "clamp(1.8rem,5vw,2.6rem)", marginBottom: 14 }}>
               {choice === "yes" ? "We can't wait to see you!" : "You'll be missed dearly"}
@@ -546,7 +548,7 @@ function RSVP() {
               <div className="cn" style={{ fontSize: ".55rem", letterSpacing: ".4em", color: "rgba(212,175,55,.55)", textTransform: "uppercase", marginBottom: 16 }}>Will you be joining us?</div>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
                 {[
-                  { val: "yes", emoji: "🥂", line1: "Yes!", line2: "With pleasure" },
+                  { val: "yes", emoji: "🎉", line1: "Yes!", line2: "With pleasure" },
                   { val: "no",  emoji: "🙏", line1: "Sorry,", line2: "But wish you the best" },
                 ].map(opt => (
                   <button
