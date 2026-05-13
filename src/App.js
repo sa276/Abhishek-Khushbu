@@ -350,7 +350,7 @@ function GoldDivider({ label }) {
     <div style={{ display: "flex", alignItems: "center", gap: 14, justifyContent: "center", margin: "20px 0" }}>
       <div style={{ flex: 1, maxWidth: 110, height: 1, background: "linear-gradient(90deg,transparent,rgba(212,175,55,.55),transparent)" }} />
       <span style={{ color: "rgba(212,175,55,.5)", fontSize: ".68rem" }}>◈</span>
-      {label && <span className="cn" style={{ color: "rgba(212,175,55,.65)", fontSize: ".62rem", letterSpacing: ".3em" }}>{label}</span>}
+      {label && <span className="cn" style={{ color: "rgba(212,175,55,.65)", fontSize: ".62rem", letterSpacing: ".3em", fontWeight:"900" }}>{label}</span>}
       <span style={{ color: "rgba(212,175,55,.5)", fontSize: ".68rem" }}>◈</span>
       <div style={{ flex: 1, maxWidth: 110, height: 1, background: "linear-gradient(90deg,transparent,rgba(212,175,55,.55),transparent)" }} />
     </div>
@@ -402,7 +402,7 @@ function Countdown() {
   const sep = <div className="gt" style={{ fontSize: "1.3rem", alignSelf: "center", marginBottom: 18, opacity: .45 }}>✦</div>;
   return (
     <div style={{ display: "flex", gap: 12, justifyContent: "center", alignItems: "center", flexWrap: "wrap" }}>
-      <Ring val={t.d} max={365} lbl="Days" r={40} sz={96} />
+      <Ring val={t.d} max={1} lbl="Days" r={40} sz={96} />
       {sep}
       <Ring val={t.h} max={24} lbl="Hours" r={36} sz={88} />
       {sep}
@@ -464,6 +464,136 @@ function CoupleStory() {
         </div>
 
         {/* Three cards with story highlights */}
+      </div>
+    </section>
+  );
+}
+
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx_HVUHiaWTyOiM7K1Eoa_G_Twal26ltEvuP0xWZsLkdZwDGW_EwJ-jz6Yj45a3-aSb/exec";
+
+function RSVP() {
+  const [name, setName] = useState("");
+  const [choice, setChoice] = useState(null); // "yes" | "no"
+  const [status, setStatus] = useState("idle"); // idle | sending | done | error
+
+  const submit = async () => {
+    if (!name.trim() || !choice) return;
+    setStatus("sending");
+    try {
+      await fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: name.trim(), rsvp: choice === "yes" ? "Yes, with pleasure!" : "Sorry, but wish you the best" }),
+      });
+      setStatus("done");
+    } catch {
+      setStatus("error");
+    }
+  };
+
+  return (
+    <section style={{ padding: "80px 24px", position: "relative", zIndex: 2 }}>
+      <div style={{ maxWidth: 580, margin: "0 auto" }}>
+
+        <div className="rv" style={{ textAlign: "center", marginBottom: 48 }}>
+          <div className="cn" style={{ fontSize: ".62rem", letterSpacing: ".5em", color: "rgba(212,175,55,.55)", textTransform: "uppercase", marginBottom: 14 }}>Chapter Three</div>
+          <h2 className="cd gt" style={{ fontSize: "clamp(2.8rem,7vw,4.2rem)", fontWeight: 400 }}>RSVP</h2>
+          <GoldDivider />
+          <p className="cg" style={{ color: "rgba(240,230,204,.62)", fontSize: "1.05rem", fontStyle: "italic", lineHeight: 1.8 }}>
+            Kindly let us know if you'll be joining us
+          </p>
+        </div>
+
+        {status === "done" ? (
+          <div className="rv gc" style={{ textAlign: "center", padding: "52px 36px", border: "1px solid rgba(212,175,55,.35)" }}>
+            <div style={{ fontSize: "2.4rem", marginBottom: 18 }}>
+              {choice === "yes" ? "🥂" : "🙏"}
+            </div>
+            <div className="cd gt" style={{ fontSize: "clamp(1.8rem,5vw,2.6rem)", marginBottom: 14 }}>
+              {choice === "yes" ? "We can't wait to see you!" : "You'll be missed dearly"}
+            </div>
+            <p className="cg" style={{ color: "rgba(240,230,204,.62)", fontSize: "1rem", fontStyle: "italic", lineHeight: 1.8 }}>
+              {choice === "yes"
+                ? "Your presence will make our celebration complete. See you on June 20th!"
+                : "Thank you for your warm wishes. We'll celebrate with you in spirit."}
+            </p>
+          </div>
+        ) : (
+          <div className="rv gc" style={{ padding: "42px 36px", border: "1px solid rgba(212,175,55,.28)" }}>
+
+            {/* Name input */}
+            <div style={{ marginBottom: 32 }}>
+              <div className="cn" style={{ fontSize: ".55rem", letterSpacing: ".4em", color: "rgba(212,175,55,.55)", textTransform: "uppercase", marginBottom: 12 }}>Your Name</div>
+              <input
+                type="text"
+                value={name}
+                onChange={e => setName(e.target.value)}
+                placeholder="Enter your full name"
+                style={{
+                  width: "100%", background: "rgba(212,175,55,.05)", border: "1px solid rgba(212,175,55,.28)",
+                  borderRadius: 6, padding: "14px 18px", color: "#F0E6CC",
+                  fontFamily: "'Cormorant Garamond',Georgia,serif", fontSize: "1.05rem",
+                  outline: "none", transition: "border-color .3s ease",
+                }}
+                onFocus={e => e.target.style.borderColor = "rgba(212,175,55,.7)"}
+                onBlur={e => e.target.style.borderColor = "rgba(212,175,55,.28)"}
+              />
+            </div>
+
+            {/* Choice buttons */}
+            <div style={{ marginBottom: 36 }}>
+              <div className="cn" style={{ fontSize: ".55rem", letterSpacing: ".4em", color: "rgba(212,175,55,.55)", textTransform: "uppercase", marginBottom: 16 }}>Will you be joining us?</div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+                {[
+                  { val: "yes", emoji: "🥂", line1: "Yes!", line2: "With pleasure" },
+                  { val: "no",  emoji: "🙏", line1: "Sorry,", line2: "But wish you the best" },
+                ].map(opt => (
+                  <button
+                    key={opt.val}
+                    onClick={() => setChoice(opt.val)}
+                    style={{
+                      background: choice === opt.val
+                        ? "linear-gradient(135deg,rgba(212,175,55,.28),rgba(212,175,55,.1))"
+                        : "rgba(212,175,55,.04)",
+                      border: choice === opt.val
+                        ? "1px solid rgba(212,175,55,.75)"
+                        : "1px solid rgba(212,175,55,.2)",
+                      borderRadius: 10, padding: "20px 14px", cursor: "pointer",
+                      textAlign: "center", transition: "all .3s ease",
+                      boxShadow: choice === opt.val ? "0 0 22px rgba(212,175,55,.18)" : "none",
+                    }}
+                  >
+                    <div style={{ fontSize: "1.6rem", marginBottom: 8 }}>{opt.emoji}</div>
+                    <div className="cn" style={{ fontSize: ".62rem", letterSpacing: ".2em", color: choice === opt.val ? "#FFD700" : "rgba(212,175,55,.55)", textTransform: "uppercase", lineHeight: 1.7 }}>
+                      {opt.line1}<br />{opt.line2}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Submit */}
+            <button
+              className="rbtn"
+              onClick={submit}
+              disabled={!name.trim() || !choice || status === "sending"}
+              style={{
+                width: "100%", opacity: (!name.trim() || !choice) ? .4 : 1,
+                cursor: (!name.trim() || !choice) ? "not-allowed" : "pointer",
+                fontSize: ".65rem", padding: "15px 24px",
+              }}
+            >
+              {status === "sending" ? "✦ Sending ✦" : "✦ Send RSVP ✦"}
+            </button>
+
+            {status === "error" && (
+              <p className="cg" style={{ textAlign: "center", color: "rgba(255,120,120,.75)", fontSize: ".9rem", marginTop: 14, fontStyle: "italic" }}>
+                Something went wrong. Please try again.
+              </p>
+            )}
+          </div>
+        )}
       </div>
     </section>
   );
@@ -545,9 +675,9 @@ export default function WeddingInvitation() {
 
         {/* FIX #4: Split names so A & K render separately, no ligature issues */}
         <div style={{ animation: "fadeUp 1.2s cubic-bezier(.22,1,.36,1) .3s both" }}>
-          <h1 className="cd sh" style={{ fontSize: "clamp(3rem,10vw,6.5rem)", fontWeight: 400, lineHeight: 1.1, letterSpacing: ".04em", display: "block" }}>ABHISHEK</h1>
-          <div className="cg gt" style={{ fontSize: "clamp(1.3rem,4vw,2.2rem)", letterSpacing: ".55em", margin: "8px 0", fontStyle: "italic", fontFamily: "'Cormorant Garamond',serif" }}>&amp;</div>
           <h1 className="cd sh" style={{ fontSize: "clamp(3rem,10vw,6.5rem)", fontWeight: 400, lineHeight: 1.1, letterSpacing: ".04em", display: "block" }}>KHUSHBU</h1>
+          <div className="cg gt" style={{ fontSize: "clamp(1.3rem,4vw,2.2rem)", letterSpacing: ".55em", margin: "8px 0", fontStyle: "italic", fontFamily: "'Cormorant Garamond',serif" }}>&amp;</div>
+          <h1 className="cd sh" style={{ fontSize: "clamp(3rem,10vw,6.5rem)", fontWeight: 400, lineHeight: 1.1, letterSpacing: ".04em", display: "block" }}>ABHISHEK</h1>
         </div>
 
         <GoldDivider label="Request The Honour Of Your Presence" />
@@ -623,6 +753,9 @@ export default function WeddingInvitation() {
         </div>
       </section>
 
+      {/* ── RSVP ── */}
+      <RSVP />
+
       {/* ── CLOSING ── */}
       <section style={{ padding: "90px 24px 70px", textAlign: "center", position: "relative", zIndex: 2 }}>
         <div className="rv" style={{ maxWidth: 680, margin: "0 auto" }}>
@@ -639,15 +772,15 @@ export default function WeddingInvitation() {
 
           {/* FIX #4: Separate lines prevent ligature merge */}
           <div>
-            <span className="cd sh" style={{ fontSize: "clamp(2.2rem,6.5vw,3.8rem)", fontWeight: 400, display: "inline" }}>Abhishek</span>
-            <span className="cg gt" style={{ fontSize: "clamp(1.2rem,3vw,2rem)", fontStyle: "italic", display: "inline", margin: "0 12px" }}>&amp;</span>
             <span className="cd sh" style={{ fontSize: "clamp(2.2rem,6.5vw,3.8rem)", fontWeight: 400, display: "inline" }}>Khushbu</span>
+            <span className="cg gt" style={{ fontSize: "clamp(1.2rem,3vw,2rem)", fontStyle: "italic", display: "inline", margin: "0 12px" }}>&amp;</span>
+            <span className="cd sh" style={{ fontSize: "clamp(2.2rem,6.5vw,3.8rem)", fontWeight: 400, display: "inline" }}>Abhishek</span>
           </div>
 
           <GoldDivider />
 
           <blockquote className="cg" style={{ fontSize: "clamp(1rem,2.5vw,1.18rem)", fontStyle: "italic", color: "rgba(240,230,204,.72)", lineHeight: 1.9, maxWidth: 520, margin: "0 auto 48px" }}>
-            "As the eternal wheels of the sun god align with a foundation as steady as the iron heartland, two souls find their center. We invite you to a celebration where the rhythm of the coast meets the enduring spirit of the forge, beginning a journey that is both resilient and divine."
+            "As the eternal wheels of the sun God align with a foundation as steady as the iron heartland, two souls find their center. We invite you to a celebration where the rhythm of the coast meets the enduring spirit of the forge, beginning a journey that is both resilient and divine."
           </blockquote>
 
           
@@ -655,7 +788,7 @@ export default function WeddingInvitation() {
           {/* Bottom filigree line */}
           <div style={{ marginTop: 64, paddingTop: 26, borderTop: "1px solid rgba(212,175,55,.1)" }}>
             <div className="cn" style={{ fontSize: ".6rem", letterSpacing: ".28em", color: "rgba(212,175,55,.28)", textTransform: "uppercase", lineHeight: 2.2 }}>
-              ◈ Abhishek Kumar &amp; Khushbu Panigrahi ◈<br />
+              ◈ Khushbu Panigrahi &amp; Abhishek Kumar ◈<br />
               <span style={{ letterSpacing: ".14em" }}>21 June 2026</span>
             </div>
           </div>
