@@ -499,7 +499,6 @@ function RSVP() {
       <div style={{ maxWidth: 580, margin: "0 auto" }}>
 
         <div className="rv" style={{ textAlign: "center", marginBottom: 48 }}>
-          <div className="cn" style={{ fontSize: ".62rem", letterSpacing: ".5em", color: "rgba(212,175,55,.55)", textTransform: "uppercase", marginBottom: 14 }}>Chapter Three</div>
           <h2 className="cd gt" style={{ fontSize: "clamp(2.8rem,7vw,4.2rem)", fontWeight: 400 }}>RSVP</h2>
           <GoldDivider />
           <p className="cg" style={{ color: "rgba(240,230,204,.62)", fontSize: "1.05rem", fontStyle: "italic", lineHeight: 1.8 }}>
