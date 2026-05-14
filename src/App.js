@@ -345,13 +345,13 @@ function FloatingOrbs() {
   );
 }
 
-function GoldDivider({ label }) {
+function GoldDivider({ label, bright }) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 14, justifyContent: "center", margin: "20px 0" }}>
       <div style={{ flex: 1, maxWidth: 110, height: 1, background: "linear-gradient(90deg,transparent,rgba(212,175,55,.55),transparent)" }} />
-      <span style={{ color: "rgba(212,175,55,.5)", fontSize: ".68rem" }}>◈</span>
-      {label && <span className="cn" style={{ color: "rgba(212,175,55,.65)", fontSize: ".62rem", letterSpacing: ".3em", fontWeight:"900" }}>{label}</span>}
-      <span style={{ color: "rgba(212,175,55,.5)", fontSize: ".68rem" }}>◈</span>
+      <span style={{ color: bright ? "rgba(212,175,55,.9)" : "rgba(212,175,55,.5)", fontSize: ".68rem" }}>◈</span>
+      {label && <span className="cn" style={{ color: bright ? "rgba(212,175,55,1)" : "rgba(212,175,55,.65)", fontSize: ".62rem", letterSpacing: ".3em", fontWeight: bright ? 700 : 900 }}>{label}</span>}
+      <span style={{ color: bright ? "rgba(212,175,55,.9)" : "rgba(212,175,55,.5)", fontSize: ".68rem" }}>◈</span>
       <div style={{ flex: 1, maxWidth: 110, height: 1, background: "linear-gradient(90deg,transparent,rgba(212,175,55,.55),transparent)" }} />
     </div>
   );
@@ -447,7 +447,7 @@ function CoupleStory() {
 
           {/* Story text */}
           <div>
-            <div className="cn" style={{ fontSize: ".9rem", letterSpacing: ".4em", color: "rgba(212,175,55,.55)", textTransform: "uppercase", marginBottom: 18 }}>The Journey</div>
+            <div className="cn" style={{ fontSize: ".9rem", letterSpacing: ".4em", color: "rgba(212,175,55,1)", textTransform: "uppercase", marginBottom: 18, fontWeight: 700 }}>The Journey</div>
             <p className="cg" style={{ fontSize: "clamp(1.05rem,2vw,1.2rem)", lineHeight: 2, color: "rgba(240,230,204,.82)", fontStyle: "italic", marginBottom: 22 }}>
               From shared wooden desks to the lecture halls where their dreams first took flight, their journey has been a rhythmic dance of two souls moving in perfect sync. They grew up within the same corridors, learning the silent language of each other’s hearts while navigating the transition from childhood to the brink of the world.
             </p>
@@ -502,7 +502,7 @@ function RSVP() {
           <h2 className="cd gt" style={{ fontSize: "clamp(2.8rem,7vw,4.2rem)", fontWeight: 400 }}>RSVP</h2>
           <GoldDivider />
           <p className="cg" style={{ color: "rgba(240,230,204,.62)", fontSize: "1.05rem", fontStyle: "italic", lineHeight: 1.8 }}>
-            Kindly let us know if you'll be joining us
+            Kindly RSVP to help us make the necessary arrangements for your comfort.
           </p>
         </div>
 
@@ -665,12 +665,12 @@ export default function WeddingInvitation() {
             <Mandala size={162} op={.2} />
           </div>
           <div style={{ position: "relative", textAlign: "center" }}>
-            <div className="cn" style={{ fontSize: ".6rem", letterSpacing: ".45em", color: "rgba(212,175,55,.7)", textTransform: "uppercase", marginBottom: 6 }}>Together Forever</div>
+            <div className="cn" style={{ fontSize: ".6rem", letterSpacing: ".45em", color: "rgba(212,175,55,1)", textTransform: "uppercase", marginBottom: 6, fontWeight: 700 }}>Together Forever</div>
             <div style={{ fontSize: "2.2rem", lineHeight: 1, animation: "bob 3s ease-in-out infinite" }}>❤️</div>
           </div>
         </div>
 
-        <div className="cg" style={{ fontSize: ".95rem", letterSpacing: ".35em", color: "rgba(212,175,55,.65)", textTransform: "uppercase", marginBottom: 22, animation: "fadeIn 2.2s ease both" }}>
+        <div className="cg" style={{ fontSize: ".95rem", letterSpacing: ".35em", color: "rgba(212,175,55,1)", textTransform: "uppercase", marginBottom: 22, animation: "fadeIn 2.2s ease both", fontWeight: 700 }}>
           ✦ Together With Their Families ✦
         </div>
 
@@ -681,28 +681,28 @@ export default function WeddingInvitation() {
           <h1 className="cd sh" style={{ fontSize: "clamp(3rem,10vw,6.5rem)", fontWeight: 400, lineHeight: 1.1, letterSpacing: ".04em", display: "block" }}>ABHISHEK</h1>
         </div>
 
-        <GoldDivider label="Request The Honour Of Your Presence" />
+        <GoldDivider label="Request The Honour Of Your Presence" bright />
 
-        <div className="cg" style={{ fontSize: "clamp(.95rem,2.5vw,1.3rem)", color: "rgba(240,230,204,.78)", letterSpacing: ".08em", fontStyle: "italic", maxWidth: 480, lineHeight: 1.85, marginBottom: 44, animation: "fadeIn 1.5s ease .8s both" }}>
+        <div className="cg" style={{ fontSize: "clamp(.95rem,2.5vw,1.3rem)", color: "rgba(240,230,204,.78)", letterSpacing: ".08em", fontStyle: "italic", maxWidth: 480, lineHeight: 1.85, marginBottom: 32, animation: "fadeIn 1.5s ease .8s both" }}>
           At the celebration of their sacred union on<br />
           <span className="cn gt" style={{ fontStyle: "normal", fontWeight: 600, fontSize: "clamp(.9rem,2vw,1.1rem)", letterSpacing: ".12em" }}>June 20 &amp; 21, 2026</span>
         </div>
 
-        {/* FIX #2: Lively Countdown */}
+        {/* Scroll cue */}
+        <div style={{ marginBottom: 40, display: "flex", flexDirection: "column", alignItems: "center", gap: 7, animation: "bob 2.5s ease-in-out infinite", opacity: .75 }}>
+          <div className="cn" style={{ color: "rgba(212,175,55,.85)", fontSize: ".6rem", letterSpacing: ".35em" }}>SCROLL TO EXPLORE</div>
+          <svg width="18" height="28" viewBox="0 0 18 28" fill="none">
+            <rect x="7" y="2" width="4" height="7" rx="2" fill="rgba(212,175,55,.75)" />
+            <path d="M2 17 L9 25 L16 17" stroke="rgba(212,175,55,.75)" strokeWidth="1.5" strokeLinecap="round" />
+          </svg>
+        </div>
+
+        {/* Countdown */}
         <div className="gc" style={{ padding: "32px 36px", maxWidth: 620, width: "100%", animation: "scaleIn 1.1s cubic-bezier(.22,1,.36,1) .6s both" }}>
-          <div className="cn" style={{ fontSize: ".6rem", letterSpacing: ".42em", color: "rgba(212,175,55,.55)", textAlign: "center", marginBottom: 26, textTransform: "uppercase" }}>
+          <div className="cn" style={{ fontSize: ".6rem", letterSpacing: ".42em", color: "rgba(212,175,55,.9)", textAlign: "center", marginBottom: 26, textTransform: "uppercase", fontWeight: 600 }}>
             ✦ Counting Down to the Celebrations ✦
           </div>
           <Countdown />
-        </div>
-
-        {/* Scroll cue */}
-        <div style={{ marginTop: 52, display: "flex", flexDirection: "column", alignItems: "center", gap: 7, animation: "bob 2.5s ease-in-out infinite", opacity: .55 }}>
-          <div className="cn" style={{ color: "rgba(212,175,55,.6)", fontSize: ".6rem", letterSpacing: ".35em" }}>SCROLL TO EXPLORE</div>
-          <svg width="18" height="28" viewBox="0 0 18 28" fill="none">
-            <rect x="7" y="2" width="4" height="7" rx="2" fill="rgba(212,175,55,.55)" />
-            <path d="M2 17 L9 25 L16 17" stroke="rgba(212,175,55,.55)" strokeWidth="1.5" strokeLinecap="round" />
-          </svg>
         </div>
       </section>
 
@@ -787,8 +787,8 @@ export default function WeddingInvitation() {
           
 
           {/* Bottom filigree line */}
-          <div style={{ marginTop: 64, paddingTop: 26, borderTop: "1px solid rgba(212,175,55,.1)" }}>
-            <div className="cn" style={{ fontSize: ".6rem", letterSpacing: ".28em", color: "rgba(212,175,55,.28)", textTransform: "uppercase", lineHeight: 2.2 }}>
+          <div style={{ marginTop: 64, paddingTop: 26, borderTop: "1px solid rgba(212,175,55,.2)" }}>
+            <div className="cn" style={{ fontSize: ".6rem", letterSpacing: ".28em", color: "rgba(212,175,55,.75)", textTransform: "uppercase", lineHeight: 2.2, fontWeight: 600 }}>
               ◈ Khushbu Panigrahi &amp; Abhishek Kumar ◈<br />
               <span style={{ letterSpacing: ".14em" }}>21 June 2026</span>
             </div>
